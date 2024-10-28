@@ -1,4 +1,5 @@
 from times import compute_overlap_time,time_range
+import pytest
 
 def test_given_input():
     if __name__ == "__main__":
@@ -29,3 +30,8 @@ def test_end_equals_start():
         short = time_range("2010-01-12 12:00:00", "2010-01-12 12:45:00", 2, 60)
         result = compute_overlap_time(large,short)
         assert all(x > y for x,y in result)
+
+def test_backwards():
+    if __name__ == "__main__":
+        with pytest.raises(ValueError, match="End time is less than start time"):
+            time_range("2010-01-12 12:00:00", "2010-01-12 10:00:00", 2, 60)
